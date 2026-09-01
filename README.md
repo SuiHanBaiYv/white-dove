@@ -55,7 +55,7 @@ npx serve .
 
 - [ ] 在 `products.html` 补充真实产品与截图
 - [ ] 在 `download.html` 提供各版本下载链接
-- [ ] 在 `about.html` 更新真实邮箱 / GitHub 地址
+- [ ] 在 `about.html` 更新真实邮箱地址
 
 ---
 
