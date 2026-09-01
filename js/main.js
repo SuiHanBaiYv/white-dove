@@ -8,6 +8,8 @@
   "use strict";
 
   // ---------- 1. 导航高亮：按当前文件名匹配 ----------
+  // 说明：HTML 里已为每个页面硬编码正确的 active（保证 JS 失效也能显示选中）。
+  // 这里只做 URL 匹配的“补强”，不再删除任何已有的 active，避免误清兜底。
   function highlightNav() {
     var path = window.location.pathname;
     var page = path.split("/").pop();
@@ -16,12 +18,9 @@
     var links = document.querySelectorAll(".nav-links a");
     for (var i = 0; i < links.length; i++) {
       var href = links[i].getAttribute("href");
-      // 精确匹配文件名（忽略大小写）
       if (href && href.toLowerCase() === page.toLowerCase()) {
         links[i].classList.add("active");
         links[i].setAttribute("aria-current", "page");
-      } else {
-        links[i].classList.remove("active");
       }
     }
   }
