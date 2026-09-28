@@ -579,3 +579,133 @@ body {
 
   .about-hero { flex-direction: column; text-align: center; }
 }
+
+/* ============================================================
+   产品卡与产品详情页
+   ============================================================ */
+
+/* 已上架产品网格（整张卡片可点击，进入详情页） */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* 只上架了一款产品时：居中并限制宽度，避免被拉成一整行 */
+.product-grid.one {
+  grid-template-columns: minmax(0, 400px);
+  justify-content: center;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  padding: 34px 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(127, 180, 255, 0.45);
+  box-shadow: 0 16px 40px rgba(110, 168, 255, 0.22);
+}
+
+.product-card .pc-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+.product-card h3 {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.product-card .pc-sub {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+.product-card .pc-ver {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(127, 180, 255, 0.3);
+  border-radius: 999px;
+  padding: 3px 14px;
+}
+
+.product-card .pc-cta {
+  margin-top: 2px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* 详情页返回链接 */
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: var(--text-dim);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+/* 详情页头部按钮行 */
+.product-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+/* 系统要求列表 */
+.req-list {
+  list-style: none;
+}
+
+.req-list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 11px;
+  color: var(--text-dim);
+  font-size: 14.5px;
+}
+
+.req-list li:last-child {
+  margin-bottom: 0;
+}
+
+.req-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 6px;
+  color: var(--accent);
+}
+
+.req-list li strong {
+  color: var(--text-main);
+}
+
+@media (max-width: 900px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .product-grid { grid-template-columns: 1fr; }
+  .product-grid.one { grid-template-columns: minmax(0, 1fr); }
+  .product-actions { justify-content: center; }
+}

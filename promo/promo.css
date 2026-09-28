@@ -1,0 +1,370 @@
+/* ============================================================
+   白鸽软件库 · 宣传片样式
+   主题：深空星空 / 影视级场景切换
+   ============================================================ */
+
+:root {
+  --accent: #7fb4ff;
+  --accent2: #a8caff;
+  --deep: #030410;
+  --text: #eef2ff;
+  --dim: #9aa3c7;
+  --font: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Segoe UI", Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: linear-gradient(160deg, #0b1030 0%, var(--deep) 55%, #01020a 100%);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---------------- 星空画布 ---------------- */
+#sky {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 暗角，增加影院氛围 */
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+/* 影院上下黑边 */
+.letterbox {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 7vh;
+  background: #000;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.55;
+}
+.letterbox.top { top: 0; }
+.letterbox.bottom { bottom: 0; }
+
+/* ---------------- 顶栏 ---------------- */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 26px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 2px;
+  animation: fadeSlide 1s ease both;
+}
+.brand img {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+}
+
+.controls { display: flex; gap: 10px; }
+
+.ctl {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-family: var(--font);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.15s ease;
+  animation: fadeSlide 1s 0.3s ease both;
+}
+.ctl:hover { background: rgba(255, 255, 255, 0.14); }
+.ctl:active { transform: scale(0.96); }
+
+/* ---------------- 场景舞台 ---------------- */
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 6vw;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.02);
+  transition: opacity 0.9s ease, transform 0.9s ease, visibility 0s linear 0.9s;
+}
+
+.scene.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: opacity 0.9s ease, transform 0.9s ease, visibility 0s;
+}
+
+/* 场景内元素默认隐藏，随场景激活按延迟逐个浮现 */
+.anim { opacity: 0; }
+.scene.active .anim {
+  animation: riseIn 0.9s cubic-bezier(0.16, 0.7, 0.2, 1) forwards;
+}
+.scene.active .d1 { animation-delay: 0.15s; }
+.scene.active .d2 { animation-delay: 0.35s; }
+.scene.active .d3 { animation-delay: 0.55s; }
+.scene.active .d4 { animation-delay: 0.75s; }
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(28px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------- 场景通用排版 ---------------- */
+.kicker {
+  color: var(--accent);
+  letter-spacing: 6px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.big {
+  font-size: clamp(34px, 6vw, 62px);
+  font-weight: 800;
+  letter-spacing: 3px;
+  line-height: 1.35;
+  background: linear-gradient(120deg, #fff 30%, var(--accent2) 70%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sub {
+  color: var(--dim);
+  margin-top: 18px;
+  font-size: 16px;
+  letter-spacing: 3px;
+}
+
+.shead {
+  font-size: clamp(24px, 3.6vw, 38px);
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin-bottom: 36px;
+}
+
+.tagline {
+  margin-top: 22px;
+  color: var(--accent);
+  font-size: 15px;
+  letter-spacing: 4px;
+  opacity: 0.85;
+}
+
+/* ---------------- 场景1：片头 Logo ---------------- */
+.logo-bloom { position: relative; display: inline-flex; margin-bottom: 26px; }
+.logo-bloom img {
+  width: 128px;
+  height: 128px;
+  border-radius: 26px;
+  box-shadow: 0 0 80px rgba(127, 180, 255, 0.5), 0 0 30px rgba(127, 180, 255, 0.3);
+}
+.scene.active .logo-bloom { animation: logoPop 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+@keyframes logoPop {
+  0%   { opacity: 0; transform: scale(0.6); }
+  60%  { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.ring {
+  position: absolute;
+  inset: -14px;
+  border: 1px solid rgba(127, 180, 255, 0.6);
+  border-radius: 34px;
+  animation: ringPulse 2s ease-out infinite;
+}
+@keyframes ringPulse {
+  0%   { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+
+.scene-title {
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: 6px;
+}
+.scene-sub {
+  margin-top: 12px;
+  color: var(--dim);
+  letter-spacing: 5px;
+  font-size: 13px;
+}
+
+/* ---------------- 场景3：特点卡片 ---------------- */
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  width: min(960px, 90vw);
+}
+
+.fcard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 26px 16px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.fcard .ic { font-size: 34px; display: block; margin-bottom: 12px; }
+.fcard h3 { font-size: 16px; margin-bottom: 8px; letter-spacing: 1px; }
+.fcard p { color: var(--dim); font-size: 13px; line-height: 1.7; }
+
+/* ---------------- 场景4：产品占位 ---------------- */
+.products-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  width: min(720px, 88vw);
+  margin-top: 34px;
+}
+.pcard {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 30px 10px;
+  color: var(--dim);
+  letter-spacing: 3px;
+  font-size: 15px;
+}
+
+/* ---------------- 场景5：开发者 ---------------- */
+.about-avatar { margin-bottom: 24px; }
+.about-avatar img {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  box-shadow: 0 0 60px rgba(127, 180, 255, 0.4);
+}
+.scene.active .about-avatar { animation: logoPop 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+/* ---------------- 场景6：结尾 CTA ---------------- */
+.cta-btns {
+  display: flex;
+  gap: 16px;
+  margin-top: 34px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-pri {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #04102a;
+  padding: 14px 36px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font);
+  text-decoration: none;
+  letter-spacing: 2px;
+  box-shadow: 0 10px 30px rgba(110, 168, 255, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-pri:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(110, 168, 255, 0.55); }
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text);
+  padding: 14px 30px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-family: var(--font);
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.btn-ghost:hover { background: rgba(255, 255, 255, 0.12); }
+.btn-ghost:active { transform: scale(0.97); }
+
+/* ---------------- 进度条 + 圆点 ---------------- */
+.progress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 9vh;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  z-index: 20;
+}
+.progress .bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 10px rgba(127, 180, 255, 0.8);
+}
+
+.dots {
+  position: fixed;
+  bottom: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.dot.on {
+  background: var(--accent);
+  transform: scale(1.4);
+  box-shadow: 0 0 8px rgba(127, 180, 255, 0.8);
+}
+
+/* ---------------- 响应式 ---------------- */
+@media (max-width: 760px) {
+  .feature-cards { grid-template-columns: repeat(2, 1fr); }
+  .products-row { grid-template-columns: 1fr; }
+  .big { letter-spacing: 1px; }
+  .topbar { padding: 12px 16px; }
+  .ctl { padding: 6px 12px; font-size: 12px; }
+}

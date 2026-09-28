@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白羽 White Feather 0.1.0 —— 一门说中文的编程语言，配套原生桌面编辑器。查看软件简介、系统要求并下载安装包。">
+  <title>白羽 White Feather 0.1.0 - 白鸽软件库</title>
+  <link rel="icon" type="image/x-icon" href="yjtp.ico">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="stars-canvas" aria-hidden="true"></canvas>
+
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <nav class="nav" aria-label="主导航">
+      <a class="nav-logo" href="index.html">
+        <img class="logo-icon" src="yjtp.png" alt="白鸽软件库"> 白鸽软件库
+      </a>
+      <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">主页</a></li>
+        <li><a href="products.html">产品</a></li>
+        <li><a href="download.html">下载</a></li>
+        <li><a href="about.html">关于</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main">
+
+    <a class="back-link" href="products.html">← 返回产品列表</a>
+
+    <!-- 产品头部：头像 + 名称 + 立即下载 -->
+    <div class="card about-hero">
+      <img class="about-avatar" src="wf.png" alt="白羽 White Feather 图标">
+      <div class="about-meta">
+        <h1>白羽 White Feather</h1>
+        <div class="role">中文编程语言 · 桌面编辑器 · 版本 0.1.0</div>
+        <p class="brief">一门「说中文」的编程语言，配套原生桌面编辑器。关键字与错误提示全部中文，单文件安装包分发——装好就能写下你的第一行中文代码。</p>
+        <div class="product-actions">
+          <a class="btn btn-primary" href="https://developer4.lanrar.com/file/?A2VXaVloVWQIAQE5Cj8FaVRrVGxXXwZsAG5bKVFoBkFVMAI0DSQFOQc0UHQDegdVUW4OfwUvViRWfFBmVSdbawMtVzBZKlVkCCYBMgp4BWJUZ1Q9V20GWwBuWzlRMAY0VWcCZA1iBWgHaVAyA2YHMFEtDm0FKVZpVmJQZFUxW2IDMlc4WTBVJwguAScKYwU2VD5UY1c+BisAN1tkUSIGNVVtAnoNYQVgBzRQMwNmB2VRMg45BTlWMlZpUGNVMVtuAzpXNVk1VTgIaAFmCjgFNFQ/VDVXaQY1AGRbPlE5BmFVZgJmDX4FNAcpUGMDcQdzUXgObgUoVj1WNVBrVTxbbgM1VzJZN1UwCGkBcQoqBW1UY1Q0V24GOQA2W2pRNAY3VWMCZQ1gBWQHY1AwA3kHKFEtDm0FNlYjVmxQZ1U+W2MDM1c1WT1VOQhuAWQKaQUiVHtUIVd/BjkANltqUTQGN1VgAmwNZwVgB2dQMANxB3NRYg57BWdWZVZhUGBVJ1tpAzRXLlkzVTYIcAFmCm8FMlQgVHdXbAZrAHBbM1FSBmRVPgJoDWAFfwd3UHIDLgd2UW4OVAUvVjVWbFBm" target="_blank" rel="noopener">立即下载</a>
+          <a class="btn btn-ghost" href="download.html">前往下载页</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 软件简介 -->
+    <section class="section">
+      <div class="section-head">
+        <h2>软件简介</h2>
+      </div>
+      <div class="card about-para">
+        <p><strong>白羽（White Feather）</strong>是一门面向中文使用者的编程语言，也是一套开箱即用的桌面编程环境。变量、循环、条件、函数这些概念在这里统统换成了中文关键字，写代码更接近写一段通顺的中文句子。</p>
+        <p>它不只是一个解释器：配套的编辑器用<strong>原生 Win32 / C++ 渲染</strong>，文字清晰不发虚，支持深色与浅色主题切换、语法高亮、行号栏和彩色控制台。写完按 <strong>F5</strong> 直接运行，<strong>Shift+F5</strong> 随时中断，结果实时显示在下方控制台里。</p>
+        <p>安装包为<strong>单文件分发</strong>，已内置运行所需的全部组件，装完即用，不需要你再单独配置 Python 环境。</p>
+        <div class="tag-list">
+          <span class="tag-chip">中文关键字</span>
+          <span class="tag-chip">中文错误提示</span>
+          <span class="tag-chip">语法高亮</span>
+          <span class="tag-chip">深色 / 浅色主题</span>
+          <span class="tag-chip">行号栏</span>
+          <span class="tag-chip">彩色控制台</span>
+          <span class="tag-chip">F5 一键运行</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 系统要求 -->
+    <section class="section">
+      <div class="section-head">
+        <h2>系统要求</h2>
+      </div>
+      <div class="card">
+        <ul class="req-list">
+          <li><strong>操作系统：</strong>Windows 10 / 11（64 位）</li>
+          <li><strong>磁盘空间：</strong>约 8 MB（安装包本身 3.14 MB）</li>
+          <li><strong>运行环境：</strong>无需预先安装 Python，也无需单独安装 VC++ 运行库——安装包已自带</li>
+          <li><strong>权限：</strong>默认装到当前用户目录，全程不需要管理员权限，不会弹出 UAC</li>
+          <li><strong>网络：</strong>软件本身无需联网即可使用</li>
+          <li><strong>提示：</strong>首次运行时若出现「Windows 已保护你的电脑」，点「更多信息 → 仍要运行」即可（安装包使用自签名证书）</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p><img class="footer-icon" src="yjtp.png" alt=""> 白鸽软件库 · 开发者：岁寒白羽 · © <span data-year>2026</span></p>
+    <p style="margin-top:4px;"><a href="about.html">关于</a> · <a href="products.html">产品</a> · <a href="download.html">下载</a></p>
+  </footer>
+
+  <script src="js/stars.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

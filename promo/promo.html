@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白鸽软件库 · 宣传片——在星空下，遇见岁寒白羽打造的一系列软件。">
+  <title>白鸽软件库 · 宣传片</title>
+  <link rel="icon" type="image/png" href="yjtp.png">
+  <link rel="stylesheet" href="promo.css">
+</head>
+<body>
+  <!-- 星空画布 -->
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="letterbox top" aria-hidden="true"></div>
+  <div class="letterbox bottom" aria-hidden="true"></div>
+
+  <!-- 顶栏：品牌 + 控制 -->
+  <header class="topbar">
+    <div class="brand">
+      <img src="yjtp.png" alt="白鸽软件库">
+      <span>白鸽软件库</span>
+    </div>
+    <div class="controls">
+      <button id="btnSound" class="ctl" type="button" aria-label="声音开关">🔇</button>
+      <a class="ctl skip" href="../index.html">跳过 →</a>
+    </div>
+  </header>
+
+  <!-- 场景舞台 -->
+  <main class="stage" id="stage">
+
+    <!-- 场景 1：片头 Logo -->
+    <section class="scene active" data-scene="logo">
+      <div class="logo-bloom anim">
+        <div class="ring" aria-hidden="true"></div>
+        <img src="yjtp.png" alt="白鸽软件库标志">
+      </div>
+      <h1 class="scene-title anim d1">白鸽软件库</h1>
+      <p class="scene-sub anim d2">WHITE DOVE SOFTWARE LIBRARY</p>
+    </section>
+
+    <!-- 场景 2：主题 -->
+    <section class="scene" data-scene="hero">
+      <p class="kicker anim">个人软件总站</p>
+      <h2 class="big anim d1">让每一款好软件<br>都找到它的用户</h2>
+      <p class="sub anim d2">简洁 · 安全 · 免费 · 持续更新</p>
+    </section>
+
+    <!-- 场景 3：特点 -->
+    <section class="scene" data-scene="features">
+      <h2 class="shead anim">我们坚持</h2>
+      <div class="feature-cards">
+        <div class="fcard anim d1"><span class="ic">🧩</span><h3>简洁易用</h3><p>界面干净，专注解决真正的问题</p></div>
+        <div class="fcard anim d2"><span class="ic">🔒</span><h3>安全可靠</h3><p>亲自开发维护，不打扰不窥探</p></div>
+        <div class="fcard anim d3"><span class="ic">🔄</span><h3>持续更新</h3><p>根据反馈不断打磨，越用越顺手</p></div>
+        <div class="fcard anim d4"><span class="ic">🎁</span><h3>免费开放</h3><p>让好工具触手可及</p></div>
+      </div>
+    </section>
+
+    <!-- 场景 4：产品 -->
+    <section class="scene" data-scene="products">
+      <h2 class="shead anim">产品库</h2>
+      <p class="sub anim d1">多款自研软件 · 陆续登场</p>
+      <div class="products-row">
+        <div class="pcard anim d2">敬请期待</div>
+        <div class="pcard anim d3">敬请期待</div>
+        <div class="pcard anim d4">敬请期待</div>
+      </div>
+    </section>
+
+    <!-- 场景 5：开发者 -->
+    <section class="scene" data-scene="about">
+      <div class="about-avatar anim"><img src="yjtp.png" alt="岁寒白羽"></div>
+      <h2 class="shead anim d1">开发者 · 岁寒白羽</h2>
+      <p class="sub anim d2">独立开发者，相信「好工具能让生活更简单」</p>
+      <p class="tagline anim d3">岁寒，然后知松柏之后凋也</p>
+    </section>
+
+    <!-- 场景 6：结尾 CTA -->
+    <section class="scene" data-scene="cta">
+      <h2 class="big anim">欢迎来到<br>白鸽软件库</h2>
+      <p class="sub anim d1">在星空下，遇见你需要的每一款软件</p>
+      <div class="cta-btns anim d2">
+        <a class="btn-pri" href="../index.html">进入网站</a>
+        <button id="btnReplay" class="btn-ghost" type="button">再看一遍 ↻</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 进度条 + 场景圆点 -->
+  <div class="progress" aria-hidden="true"><div class="bar" id="progressBar"></div></div>
+  <div class="dots" id="dots" aria-hidden="true"></div>
+
+  <script src="promo.js"></script>
+</body>
+</html>
