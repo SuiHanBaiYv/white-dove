@@ -709,3 +709,116 @@ body {
   .product-grid.one { grid-template-columns: minmax(0, 1fr); }
   .product-actions { justify-content: center; }
 }
+
+/* ---------------- 下载确认弹窗 ---------------- */
+.dl-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;                    /* 高于顶部导航(100) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  /* visibility 本身不做渐变：只在淡出播完后延迟切换。
+     否则打开的一瞬间元素仍被判定为「不可见」，无法接收键盘焦点。 */
+  transition: opacity 0.26s ease, visibility 0s linear 0.26s;
+}
+
+.dl-modal.open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.26s ease, visibility 0s linear 0s;
+}
+
+.dl-modal-mask {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 5, 16, 0.74);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dl-modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  padding: 32px 32px 26px;
+  border-radius: 20px;
+  text-align: center;
+  background: linear-gradient(160deg, rgba(24, 34, 68, 0.99), rgba(9, 14, 36, 0.99));
+  border: 1px solid rgba(127, 180, 255, 0.26);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.62), 0 0 90px rgba(110, 168, 255, 0.14);
+  transform: translateY(18px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.12);
+}
+
+.dl-modal.open .dl-modal-box {
+  transform: none;
+}
+
+.dl-modal-title {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-main);
+}
+
+.dl-modal-text {
+  margin-top: 12px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+
+/* 提取密码展示块 */
+.dl-pass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 22px 0 26px;
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: rgba(127, 180, 255, 0.1);
+  border: 1px dashed rgba(127, 180, 255, 0.42);
+}
+
+.dl-pass-label {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+}
+
+.dl-pass-code {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: #a8caff;
+  text-shadow: 0 0 22px rgba(127, 180, 255, 0.55);
+}
+
+.dl-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.dl-actions .btn {
+  flex: 1 1 0;
+  padding: 12px 18px;
+  text-align: center;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* 弹窗打开时锁定页面滚动 */
+body.dl-open {
+  overflow: hidden;
+}
+
+@media (max-width: 420px) {
+  .dl-modal-box { padding: 26px 20px 22px; }
+  .dl-actions { flex-direction: column; }
+}

@@ -53,9 +53,71 @@
     if (el) el.textContent = String(new Date().getFullYear());
   }
 
+  // ---------- 4. 下载确认弹窗 ----------
+  // 带 data-dl-trigger 的按钮不再直接跳转，而是先弹出提示（含网盘提取密码），
+  // 由弹窗内的「立即下载」真正打开链接。
+  // 链接本身仍写在触发按钮的 href 上 —— 脚本失效时按钮照样能直接下载（渐进增强）。
+  function setupDownloadModal() {
+    var modal = document.getElementById("dl-modal");
+    var triggers = document.querySelectorAll("[data-dl-trigger]");
+    if (!modal || !triggers.length) return;
+
+    var goBtn = document.getElementById("dl-go");
+    var lastFocus = null;
+
+    function openModal(e) {
+      if (e) e.preventDefault();
+
+      // 焦点交还目标 = 被点击的那个按钮本身。
+      // 不依赖 document.activeElement：程序化触发时它可能还停在 body 上。
+      var trigger = (e && e.currentTarget) || document.activeElement;
+      lastFocus = trigger;
+
+      // 把真实链接交给弹窗里的按钮（链接只在触发按钮上写一份）
+      if (goBtn) goBtn.setAttribute("href", trigger.getAttribute("href") || "#");
+
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+
+      // 锁滚动，并补掉滚动条消失带来的宽度差，避免页面横向跳动
+      var gap = window.innerWidth - document.documentElement.clientWidth;
+      if (gap > 0) document.body.style.paddingRight = gap + "px";
+      document.body.classList.add("dl-open");
+
+      // 强制一次样式重算（读 offsetHeight 触发 reflow）。
+      // 弹窗刚从 visibility:hidden 转为可见，不做这一步的话浏览器仍会
+      // 认为该元素不可聚焦，focus() 会被静默忽略。
+      void modal.offsetHeight;
+      if (goBtn) goBtn.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("dl-open");
+      document.body.style.paddingRight = "";
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    for (var i = 0; i < triggers.length; i++) {
+      triggers[i].addEventListener("click", openModal);
+    }
+
+    // 取消按钮 / 点击遮罩关闭
+    modal.addEventListener("click", function (e) {
+      if (e.target.closest && e.target.closest("[data-dl-cancel]")) closeModal();
+    });
+
+    // Esc 关闭
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     highlightNav();
     setupMobileMenu();
     setFooterYear();
+    setupDownloadModal();
   });
 })();
